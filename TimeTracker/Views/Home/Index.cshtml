@@ -6,7 +6,10 @@
 
 <h2>Today's Entries</h2>
 
-<a class="btn btn-primary mb-3" asp-action="Create">Add New Entry</a>
+<div class="mb-3">
+    <a class="btn btn-primary mb-3" asp-action="Create">Add New Entry</a>
+    <a class="btn btn-info mb-3" asp-action="Statistics">View Statistics</a>
+</div>
 
 @if (!Model.Any())
 {
