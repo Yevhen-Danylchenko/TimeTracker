@@ -1,0 +1,15 @@
+﻿@model TimeTracker.Models.TimeEntry
+
+<div class="card mb-2">
+    <div class="card-body">
+        <h5 class="card-title">@Model.TaskName</h5>
+        <p class="card-text">
+            <strong>Category:</strong> @Model.Category <br />
+            <strong>Start:</strong> @Model.StartTime.ToString("g") <br />
+            <strong>End:</strong> @Model.EndTime.ToString("g") <br />
+            <strong>Duration:</strong> @Model.DurationInMinutes minutes <br />
+            <strong>Notes:</strong> @Model.Notes
+        </p>
+    </div>
+</div>
+

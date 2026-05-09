@@ -1,0 +1,40 @@
+﻿@model TimeTracker.Models.TimeEntry
+
+@{
+    ViewData["Title"] = "Add Entry";
+}
+
+<h2>Add Entry</h2>
+
+<form asp-action="Create" method="post" class="card p-3">
+    <div class="mb-3">
+        <label asp-for="TaskName" class="form-label"></label>
+        <input asp-for="TaskName" class="form-control" />
+        <span asp-validation-for="TaskName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Category" class="form-label"></label>
+        <select asp-for="Category" class="form-select"
+                asp-items="Html.GetEnumSelectList<TimeTracker.Models.CategoryEnum>()"></select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="StartTime" class="form-label"></label>
+        <input asp-for="StartTime" type="datetime-local" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EndTime" class="form-label"></label>
+        <input asp-for="EndTime" type="datetime-local" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label"></label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+

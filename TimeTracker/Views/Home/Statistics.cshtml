@@ -1,0 +1,61 @@
+﻿@model Dictionary<string, object>
+
+@{
+    ViewData["Title"] = "Statistics";
+    var entries = ViewBag.FilteredEntries as IEnumerable<TimeTracker.Models.TimeEntry>;
+    var byCategory = Model["MinutesByCategory"] as Dictionary<string, int>;
+}
+
+<h2>Statistics</h2>
+
+<div class="row mb-3">
+    <div class="col">
+        <form method="get" asp-action="Statistics" class="d-flex gap-2">
+            <select name="period" class="form-select">
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="all">All Time</option>
+            </select>
+
+            <select name="category" class="form-select">
+                <option value="">All Categories</option>
+                @foreach (var cat in Enum.GetValues(typeof(TimeTracker.Models.CategoryEnum)))
+                {
+                    <option value="@cat">@cat</option>
+                }
+            </select>
+
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p><strong>Total Entries:</strong> @Model["TotalEntries"]</p>
+        <p><strong>Total Minutes:</strong> @Model["TotalMinutes"]</p>
+        <p><strong>Average Minutes:</strong> @Model["AverageMinutes"]</p>
+
+        <h5>Minutes by Category:</h5>
+        <ul>
+            @foreach (var kv in byCategory)
+            {
+                <li>@kv.Key: @kv.Value minutes</li>
+            }
+        </ul>
+    </div>
+</div>
+
+<h3>Filtered Entries</h3>
+@if (entries != null && entries.Any())
+{
+    @foreach (var entry in entries)
+    {
+        @Html.Partial("_TimeEntryPartial", entry)
+    }
+}
+else
+{
+    <div class="alert alert-info">No entries found for selected filter.</div>
+}
+
